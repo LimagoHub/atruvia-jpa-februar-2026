@@ -1,0 +1,109 @@
+<config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+    <!--
+        Cache-Template "default":
+        Dient als wiederverwendbare Vorlage für andere Caches.
+        Kann von konkreten Caches referenziert werden (hier nicht genutzt).
+    -->
+    <cache-template name="default">
+
+        <expiry>
+            <!--
+                TTL (Time To Live) = 10 Minuten
+                Ein Cache-Eintrag bleibt maximal 10 Minuten im Cache,
+                unabhängig davon, ob er zwischenzeitlich verwendet wird.
+            -->
+            <ttl unit="minutes">10</ttl>
+        </expiry>
+
+        <!--
+            Heap-Speicher: Maximal 1000 Einträge im Java-Heap.
+            Wird dieser Wert überschritten, werden Einträge
+            gemäß Eviction-Strategie (LRU) entfernt.
+        -->
+        <heap unit="entries">1000</heap>
+    </cache-template>
+
+
+    <!--
+        Cache für Customer-Entitäten.
+        Alias entspricht dem vollqualifizierten Klassennamen.
+        Wird typischerweise für 2nd-Level-Cache (z.B. Hibernate) genutzt.
+    -->
+    <cache alias="de.atruvia.projekt_04.entity.Customer">
+
+        <!-- Schlüsseltyp des Caches -->
+        <key-type>java.lang.Object</key-type>
+
+        <!-- Gespeicherter Wertetyp -->
+        <value-type>java.lang.Object</value-type>
+
+        <expiry>
+            <!--
+                TTL = 1 Stunde
+                Customer-Objekte bleiben maximal 1 Stunde im Cache,
+                danach werden sie automatisch invalidiert.
+            -->
+            <ttl unit="hours">1</ttl>
+        </expiry>
+        <!-- <expiry>
+                <ttl unit="hours">1</ttl>
+                <tti unit="minutes">10</tti>
+               </expiry>
+        -->
+        <!--
+            Maximal 500 Customer-Objekte im Heap.
+            Bei Überschreitung erfolgt automatische Verdrängung.
+        -->
+
+        <heap unit="entries">500</heap>
+    </cache>
+
+
+    <!--
+        Cache für Query-Ergebnisse (typisch bei Hibernate).
+        Speichert Ergebnislisten von Datenbankabfragen.
+    -->
+    <cache alias="default-query-results-region">
+
+        <expiry>
+            <!--
+                TTL = 5 Minuten
+                Query-Ergebnisse werden relativ kurz gehalten,
+                um veraltete Daten zu vermeiden.
+            -->
+            <ttl unit="minutes">5</ttl>
+        </expiry>
+
+        <!--
+            Maximal 100 Query-Ergebnisse gleichzeitig im Speicher.
+        -->
+        <heap unit="entries">100</heap>
+    </cache>
+
+
+    <!--
+        Cache für Update-Timestamps (Hibernate).
+        Speichert Zeitstempel zur Invalidierung von Query-Caches.
+        Wichtig für Cache-Konsistenz.
+    -->
+    <cache alias="default-update-timestamps-region">
+
+        <expiry>
+            <!--
+                Kein Ablauf (kein TTL).
+                Einträge bleiben dauerhaft im Cache,
+                bis sie explizit entfernt oder überschrieben werden.
+            -->
+            <none/>
+        </expiry>
+
+        <!--
+            Maximal 1000 Timestamp-Einträge im Heap.
+        -->
+        <heap unit="entries">1000</heap>
+    </cache>
+
+</config>
