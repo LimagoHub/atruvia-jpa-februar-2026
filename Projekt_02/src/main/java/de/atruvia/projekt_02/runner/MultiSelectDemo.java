@@ -55,7 +55,7 @@ public class MultiSelectDemo {
             TypedQuery<TinyCustomer> query = em.createQuery(cq);
 
             // Optional: Limit setzen für die Demo
-            query.setMaxResults(20);
+            //query.setMaxResults(20);
 
             List<TinyCustomer> results = query.getResultList();
 

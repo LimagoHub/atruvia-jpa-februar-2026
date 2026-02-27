@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -28,7 +29,7 @@ public class Main {
         }
         ));
 
-        mergePerson();
+        //mergePerson();
 
     }
 
@@ -83,6 +84,10 @@ public class Main {
         Person p = Person.builder().id(UUID.fromString("d70c84b3-51d5-483e-9460-52b10be51734")).vorname("John").nachname("Wayne").build();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
+
+        /*Optional<Person> p = Optional.ofNullable(
+                entityManager.find(Person.class, UUID.fromString("d70c84b3-51d5-483e-9460-52b10be51734"))
+        );*/
 
         p = entityManager.find(Person.class, UUID.fromString("d70c84b3-51d5-483e-9460-52b10be51734"));
 

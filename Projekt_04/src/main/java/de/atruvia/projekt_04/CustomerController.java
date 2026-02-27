@@ -2,8 +2,9 @@ package de.atruvia.projekt_04;
 
 
 
-import de.atruvia.projekt_04.entity.Customer;
+import de.atruvia.projekt_04.persistence.entity.Customer;
 
+import de.atruvia.projekt_04.persistence.CustomerRepository;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;

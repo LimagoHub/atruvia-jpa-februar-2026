@@ -1,4 +1,4 @@
-package de.atruvia.projekt_04.entity;
+package de.atruvia.projekt_04.persistence.entity;
 
 
 import jakarta.persistence.*;

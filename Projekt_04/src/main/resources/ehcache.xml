@@ -32,7 +32,7 @@
         Alias entspricht dem vollqualifizierten Klassennamen.
         Wird typischerweise für 2nd-Level-Cache (z.B. Hibernate) genutzt.
     -->
-    <cache alias="de.atruvia.projekt_04.entity.Customer">
+    <cache alias="de.atruvia.projekt_04.persistence.entity.Customer">
 
         <!-- Schlüsseltyp des Caches -->
         <key-type>java.lang.Object</key-type>

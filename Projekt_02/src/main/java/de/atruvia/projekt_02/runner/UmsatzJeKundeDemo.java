@@ -7,8 +7,10 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ import java.util.List;
  * gefiltert nach Land und Mindestumsatz (HAVING).
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UmsatzJeKundeDemo {
     private final EntityManagerFactory entityManagerFactory;
 
@@ -42,13 +44,13 @@ public class UmsatzJeKundeDemo {
              * 4. Arithmetik & Aggregation:
              * Umsatz = Summe von (Quantity * UnitPrice)
              */
-            // Nutze .as(Double.class), um den Typ sicher zu konfolidieren
-            Expression<Double> lineItemTotal = cb.prod(
-                    detailJoin.get(OrderDetail_.quantity),
-                    detailJoin.get(OrderDetail_.unitPrice)
-            ).as(Double.class);
 
-            Expression<Double> sumExpression = cb.sum(lineItemTotal);
+            Expression<BigDecimal> lineItemTotal = cb.prod(
+                    detailJoin.get(OrderDetail_.quantity).as(BigDecimal.class),
+                    detailJoin.get(OrderDetail_.unitPrice).as(BigDecimal.class)
+            );
+
+            Expression<BigDecimal> sumExpression = cb.sum(lineItemTotal);
 
 
             /*

@@ -1,8 +1,6 @@
 package de.atruvia.app.entity;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +22,10 @@ public class AbstractEntity {
     @PrePersist
     public void prePersist() {
         id = UUID.randomUUID();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        // Timestamp setzen
     }
 }

@@ -1,6 +1,7 @@
-package de.atruvia.projekt_04.entity;
+package de.atruvia.projekt_04.persistence.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -11,9 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 @Entity
 @Table(name = "customers")
 /*
@@ -98,10 +97,12 @@ public class Customer{
     Die Lösung: Du musst auch die Collection als "cacheable" markieren.
     Füge in der Klasse Customer.java über dem Feld orders folgende Annotation hinzu:
     */
+    @JsonIgnore
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @OneToMany(mappedBy = "customerID")
+    @OneToMany(mappedBy = "customerID", fetch = FetchType.EAGER)
     @ToString.Exclude
     @Builder.Default
+    @EqualsAndHashCode.Exclude
     private List<Order> orders = new ArrayList<>();
 
 }
