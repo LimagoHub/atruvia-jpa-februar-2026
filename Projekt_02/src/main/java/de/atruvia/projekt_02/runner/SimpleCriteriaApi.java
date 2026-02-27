@@ -50,6 +50,9 @@ public class SimpleCriteriaApi {
              * Spaltennamen zu vermeiden. Customer_.COUNTRY ist typsicher.
              */
 
+            // Startpunkt für eine ODER-Verknüpfung (ein "leeres" FALSE)
+           // Predicate pOr = cb.disjunction();
+
             // Startpunkt für eine UND-Verknüpfung (ein "leeres" TRUE)
             Predicate pAnd = cb.conjunction();
 
@@ -58,7 +61,7 @@ public class SimpleCriteriaApi {
             pAnd = cb.and(pAnd, cb.equal(root.get(Customer_.country), "Germany"));
 
             // Beispiel für einen weiteren (optionalen) Filter:
-            // pAnd = cb.and(pAnd, cb.like(root.get(Customer_.companyName), "A%"));
+            pAnd = cb.and(pAnd, cb.like(root.get(Customer_.companyName), "A%"));
 
             // 7. Where: Die gesammelten Bedingungen der Query hinzufügen
             cq.where(pAnd);

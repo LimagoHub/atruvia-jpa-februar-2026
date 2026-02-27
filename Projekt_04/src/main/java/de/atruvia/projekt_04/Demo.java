@@ -17,6 +17,6 @@ public class Demo {
 
     @PostConstruct
     private void test(){
-        customerRepository.simplePersist(Customer.builder().id("12345").companyName("Test").build());
+        customerRepository.simplePersist(Customer.builder().id("12346").companyName("Test").build());
     }
 }

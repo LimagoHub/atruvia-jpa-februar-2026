@@ -15,8 +15,11 @@ public class AppRunner implements CommandLineRunner {
     @Override
     public void run(final String... args) throws Exception {
         //demoService.demonstrateFirstLevelCache();
+        //demoService.demonstrateSecondLevelCache();
         demoService.getCustomersByCity("Berlin").forEach(System.out::println);
         demoService.getCustomersByCity("Berlin").forEach(System.out::println);
+        demoService.getCustomersByCity("Mannheim").forEach(System.out::println);
+
 
         cacheStatisticsLogger.logStats();
     }

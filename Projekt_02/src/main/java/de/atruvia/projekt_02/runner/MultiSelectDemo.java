@@ -32,13 +32,13 @@ public class MultiSelectDemo {
          */
         try (EntityManager em = entityManagerFactory.createEntityManager()) {
 
-            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
             // 2. Das Ziel der Query ist nicht die Entity, sondern unser DTO TinyCustomer
-            CriteriaQuery<TinyCustomer> cq = cb.createQuery(TinyCustomer.class);
+            CriteriaQuery<TinyCustomer> criteriaBuilderQuery = criteriaBuilder.createQuery(TinyCustomer.class);
 
             // 3. Die Datenquelle bleibt jedoch die Customer-Entity
-            Root<Customer> root = cq.from(Customer.class);
+            Root<Customer> root = criteriaBuilderQuery.from(Customer.class);
 
             /*
              * 4. MultiSelect (Projektion)
@@ -46,13 +46,13 @@ public class MultiSelectDemo {
              * WICHTIG: Die Reihenfolge muss exakt dem Konstruktor von TinyCustomer entsprechen!
              * (z.B. erst CompanyName, dann City)
              */
-            cq.multiselect(
+            criteriaBuilderQuery.multiselect(
                     root.get(Customer_.companyName),
-                    root.get(Customer_.city) // Korrigiert: Metamodel ist i.d.R. camelCase
+                    root.get(Customer_.city)
             );
 
             // 5. Abfrage ausführen
-            TypedQuery<TinyCustomer> query = em.createQuery(cq);
+            TypedQuery<TinyCustomer> query = em.createQuery(criteriaBuilderQuery);
 
             // Optional: Limit setzen für die Demo
             //query.setMaxResults(20);

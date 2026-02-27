@@ -14,13 +14,14 @@ public class AppRunner implements CommandLineRunner {
 
         @Override
         public void run(String... args) {
-            new SimpleCriteriaApi(entityManagerFactory).go();
+            //new SimpleCriteriaApi(entityManagerFactory).go();
             //new MultiSelectDemo(entityManagerFactory).go();
+            //new JoinDemo(entityManagerFactory).go();
             //new JoinFetchDemo(entityManagerFactory).go();
             //new SubSelectDemo(entityManagerFactory).go();
             //new SubSelectExistsDemo(entityManagerFactory).go();
             //new EntityGraphExample(entityManagerFactory).go();
-            //new UmsatzJeKundeDemo(entityManagerFactory).go();
+            new UmsatzJeKundeDemo(entityManagerFactory).go();
         }
 
 }

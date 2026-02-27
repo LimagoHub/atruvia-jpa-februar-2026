@@ -93,9 +93,7 @@ public class JPAConfig {
         // 4. Statistiken (extrem wichtig für die Demo!)
         jpaProperties.put("hibernate.generate_statistics", "true");
 
-        jpaProperties.put("hibernate.cache.use_second_level_cache", "true");
-        jpaProperties.put("hibernate.cache.use_query_cache", "true");
-        jpaProperties.put("hibernate.cache.region.factory_class", "org.hibernate.cache.jcache.internal.JCacheRegionFactory");
+
 
 
         jpaProperties.put("jakarta.persistence.cache.uri", "ehcache.xml");

@@ -29,6 +29,16 @@ public class DemoService {
     }
 
     @Transactional
+    public void demonstrateSecondLevelCache() {
+        // 1. Abfrage: Geht zur DB
+        Customer c1 = em.find(Customer.class, "ALFKI");
+        // 2. Abfrage: Kommt aus dem First-Level-Cache (kein SQL in der Konsole)
+        Customer c2 = em.find(Customer.class, "ALFKI");
+
+        System.out.println(c1 == c2); // true!
+    }
+
+    @Transactional
     public List<Customer> getCustomersByCity(String city) {
         return em.createQuery("SELECT c FROM Customer c WHERE c.city = :city", Customer.class)
                 .setParameter("city", city)

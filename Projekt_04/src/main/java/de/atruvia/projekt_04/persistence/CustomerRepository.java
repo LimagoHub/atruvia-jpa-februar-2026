@@ -10,7 +10,7 @@ import java.util.List;
 
 
 // Das Repository
-public interface CustomerRepository extends JpaRepository<Customer, String> , CustomerRepositoryCustom{
+public interface CustomerRepository extends JpaRepository<Customer, String>, CustomerRepositoryCustom{
 
     // Damit der Query-Cache für eine Methode im Repo zieht:
     @QueryHints(@QueryHint(name = "org.hibernate.cacheable", value = "true"))

@@ -41,6 +41,8 @@ public class JoinFetchDemo {
             // Wir nutzen einen LEFT JOIN, um auch Kunden ohne Bestellungen zu erfassen
             Join<Customer, Order> orderJoin = customerRoot.join(Customer_.orders, JoinType.LEFT);
 
+
+
             // 4. Aggregations-Funktion: Wir zählen die Einträge im Join-Pfad
             Expression<Long> countExpression = cb.count(orderJoin);
 
@@ -65,7 +67,7 @@ public class JoinFetchDemo {
              * 8. Filterung:
              * Wir filtern auf ein Attribut der verknüpften Tabelle (Order).
              */
-            Predicate pShipCountry = cb.equal(orderJoin.get(Order_.shipCountry), "Germany");
+            Predicate pShipCountry = cb.equal(orderJoin.get(Order_.shipCountry), "USA");
             cq.where(pShipCountry);
 
             // 9. Ausführung der typsicheren Abfrage
